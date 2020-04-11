@@ -1,0 +1,13 @@
+body {
+    
+}
+
+.photos {
+    display:flex;
+    justify-content: space-around;
+}
+
+.thumbnail {
+    width:100%;
+    max-width: 250px;
+}
