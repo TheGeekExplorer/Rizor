@@ -1,13 +1,86 @@
-body {
-    
-}
-
-.photos {
-    display:flex;
-    justify-content: space-around;
+html, body {
+    background-color: #eee;
+    display:    block;
+    margin:     0px;
+    padding:    0px;
+    height:     100%;
+    box-sizing: border-box;
 }
 
 .thumbnail {
     width:100%;
     max-width: 250px;
 }
+
+.hidden {
+    display:none;
+}
+
+
+.container {
+    padding-top: 2em;
+    margin:    0;
+    width:     100%;
+    max-width: 100%;
+    clear:     both;
+}
+.container.control-panel {
+    padding:   0;
+    margin:    0;
+    width:     100%;
+    max-width: 100%;
+    clear:     both;
+}
+
+
+/** Control Panel **/
+/** Control Panel **/
+
+
+
+/** LEFT MENU **/
+
+.left-menu {
+    background-color: #728C7F;
+    height: 100%;
+    width:  60px;
+    padding: 0 0;
+    float:  left;
+    box-shadow: 0 5px 10px #44544C;
+}
+
+.left-menu ul {
+    margin: 0 0;
+    padding: 0.75em 0;
+    list-style-type: none;
+}
+
+.left-menu ul li {
+    padding: 0.5em 0;
+    width:100%;
+    text-align:center;
+}
+
+.left-menu ul li a {
+    font-weight: bold;
+    color: #fff;
+}
+
+.left-menu .fa {
+    font-size: 1.25em !important;
+}
+.left-menu .fa:hover,
+.left-menu .fa:focus {
+    color: #ccc;
+}
+
+/** RIGHT MENU **/
+
+.right-menu {
+    width: calc(100% - 105px);
+    padding-left: 30px;
+    padding-top:  10px;
+    float: left;
+}
+
+

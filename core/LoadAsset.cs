@@ -10,6 +10,10 @@ namespace Core
 {
     class LoadAsset
     {
+
+        // Loads and returns the binary for an asset, such as a JPG
+        // @param string url
+        // @return binary bin
         public byte[] LoadBinary (string url) 
         {
             byte[] bin;
@@ -27,6 +31,9 @@ namespace Core
         }
 
 
+        // Loads and returns the text for an asset, such as a CSS file
+        // @param string url
+        // @return binary text
         public byte[] LoadText (string url) 
         {
             byte[] text;

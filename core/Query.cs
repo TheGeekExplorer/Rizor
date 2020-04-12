@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Net;
 using System.Collections.Generic;
@@ -8,6 +7,7 @@ namespace Core
 {
     class Query
     {
+        // Memory cache store for the query string items
         public static Dictionary<string, string> Data = new Dictionary<string, string>(); 
 
 
@@ -34,14 +34,15 @@ namespace Core
                 
                 // Check that array not empty
                 if (pairs2.Length > 1)
-                    Data.Add(pairs2[0], pairs2[1]);
+                    Data.Add(
+                        WebUtility.UrlDecode(pairs2[0]), 
+                        WebUtility.UrlDecode(pairs2[1])
+                    );
             }
 
             // Return data
             return Data;
         }
-
-
 
 
         
@@ -53,9 +54,24 @@ namespace Core
             // Clear down the dictionary
             Data.Clear();
 
+            string aKey   = "";
+            string aValue = "";
+
             // Run through the QueryString
             foreach (var key in req.QueryString)
-                Data.Add(key.ToString(), req.QueryString[key.ToString()]);
+
+                // Get the Key
+                aKey = WebUtility.UrlDecode(
+                    key.ToString()
+                );
+
+                // Get the Value for the key
+                aValue = WebUtility.UrlDecode(
+                    req.QueryString[aKey]
+                );
+
+                // Add to the dictionary
+                Data.Add(aKey, aValue);
 
             // Return data
             return Data;

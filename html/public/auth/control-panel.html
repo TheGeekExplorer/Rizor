@@ -1,0 +1,123 @@
+<html>
+    <head>
+        <title>Rizor Control Panel!</title>
+
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="/html/public/font-awesome/css/all.css" rel="stylesheet">
+        <link href="/html/public/css/global.css" rel="stylesheet">
+
+    </head>
+    <body>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#"><i class="fa fa-cog"></i> RIZOR</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+
+        <main class="container control-panel">
+            
+            <!-- LEFT PANE -->
+            <aside class="left-menu">
+                <ul>
+                    <li><a href="/auth/portal/" title="Control Panel Home"><i class="fa fa-home"></i></a></li>
+                    <li><a href="/auth/portal/job-server/" title="Teppanyaki Schedule"><i class="fa fa-business-time"></i></a></li>
+                    <li><a href="/auth/portal/weather/" title="Weather Stats &amp; Configuration"><i class="fa fa-cloud-sun-rain"></i></a></li>
+                    <li><a href="/auth/portal/backups/" title="Backup Stats &amp; Configuration"><i class="fa fa-hdd"></i></a></li>
+                    <li><a href="/auth/portal/user-management/" title="User Management"><i class="fa fa-users"></i></a></li>
+                    <li><a href="/auth/portal/actions/" title="Rizor Management"><i class="fa fa-stop-circle"></i></a></li>
+                    <li><a href="#" id="logout" title="Logout"><i class="fa fa-door-open"></i></a></li>
+                </ul>
+            </aside>
+
+            <!-- RIGHT PANE -->
+            <article class="right-menu">
+                <h1>Rizor Control Panel</h1>
+                
+                
+                <!-- ERROR MESSAGING -->
+                <span id="error" class="badge badge-secondary hidden">There was a problem while trying to log you out. Please try again.</span>
+
+
+                <!-- TOP STAT BOXES -->
+                <div class="row">
+                    
+                    <!-- STAT BOX #1 -->
+                    <div class="col-sm-12 col-md-4">
+                        <div class="stat-box">
+                            
+                            <div>
+                                <h3>System Graphs</h3>
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                    <!-- STAT BOX #2 -->
+                    <div class="col-sm-12 col-md-4">
+                        <div class="stat-box">
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- STAT BOX #3 -->
+                    <div class="col-sm-12 col-md-4">
+                        <div class="stat-box">
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </article>
+
+        </main>
+
+    </body>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+
+ 
+
+
+    <script>
+        // On form submit send data to API
+        $("#logout").click(function(e) {
+            e.preventDefault();
+            
+            // Define data
+            var data = {};
+            
+            // Send to API for Login
+            $.ajax({
+                type: "POST",
+                url: "/api/auth/logout",
+                data: data,
+                statusCode: {
+                    
+                    // Success, user is authed
+                    200: function () {
+                        window.location.href = "/";
+                    },
+
+                    // Error API Not Found.
+                    404: function () {
+                        $("#error").show();
+                    },
+
+                    // Major Internal Error.
+                    500: function () {
+                        $("#error").show();
+                    },
+
+                },
+                dataType: "application/json"
+            });
+        });
+
+    </script>
+
+</html>

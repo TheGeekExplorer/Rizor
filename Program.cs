@@ -23,6 +23,9 @@ namespace WebServer
             // While a user hasn't visited the `shutdown` url, keep on handling requests
             while (runServer)
             {
+                // Create default admin user
+                MemoryCache.Universe.Add("LoginDetails_mark", "Pickle31+");
+
                 // Will wait here until we hear from a connection
                 HttpListenerContext ctx = await listener.GetContextAsync();
                 HttpListenerRequest req = ctx.Request;

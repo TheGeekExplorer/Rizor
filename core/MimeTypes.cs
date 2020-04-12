@@ -1,15 +1,11 @@
-using System;
-using System.IO;
-using System.Text;
-using System.Net;
-using System.Threading.Tasks;
-using Controllers;
-
-
 namespace Core
 {
     class MimeTypes
     {
+
+        // Determines and returns the correct MimeType header for the browser
+        // @param string url
+        // @return string
         public string[] Determine (string url) 
         {
             if (url.EndsWith(".jpg"))
@@ -35,6 +31,12 @@ namespace Core
 
             if (url.EndsWith(".css"))
                 return new string[]{"text","text/css"};
+
+            if (url.EndsWith(".woff"))
+                return new string[]{"binary","font/woff"};
+
+            if (url.EndsWith(".woff2"))
+                return new string[]{"binary","font/woff2"};
 
             // Shutdown command
             if (url.EndsWith("/shutdown"))

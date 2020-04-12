@@ -8,17 +8,22 @@ using MemoryCache;
 
 namespace Controllers
 {
-    class HomeController
+    class LoginController
     {
 
-        // Home Controller
+        // Login Controller for the Control Panel
         // @param ref HttpListenerRequest req
         // @param ref HttpListenerResponse resp
         // @return string html
-        public string HomePage (ref HttpListenerRequest req, ref HttpListenerResponse resp) 
+        public string LoginPage (ref HttpListenerRequest req, ref HttpListenerResponse resp) 
         {
+            // Check session is active
+            string username = Authentication.VerifySession(ref req, ref resp);
+            if (username != null)
+                resp.Redirect("/auth/portal/");
+
             // Define the path to the content
-            string path = "D:\\Development\\C#\\Rizor\\html\\public\\index.html";
+            string path = "D:\\Development\\C#\\Rizor\\html\\public\\auth\\login.html";
 
             // Load the HTML page into a string
             string html = File.ReadAllText(path);

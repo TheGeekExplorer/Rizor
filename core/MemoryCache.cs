@@ -1,15 +1,14 @@
-using System;
-using System.IO;
-using System.Text;
-using System.Collections;
 using System.Collections.Generic;
 using Core;
-
 
 namespace MemoryCache
 {
     class Universe
     {
+
+        // Main cache object in memory
+        // Key   == string
+        // Value == string
         private static Dictionary<string, string> Cache = new Dictionary<string, string>();
 
 

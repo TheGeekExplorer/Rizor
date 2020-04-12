@@ -1,67 +1,60 @@
-using System;
-using System.IO;
-using System.Text;
 using System.Net;
-using System.Threading.Tasks;
 using Controllers;
-
 
 namespace Core
 {
     class Router
     {
+
+        // Main Router for the Server.  This method takes the request and determines
+        // which Controller the request should be invoked for.
+        // @param ref HttpListenerRequest req
+        // @param ref HttpListenerResponse resp
+        // @return string
         public string FindRoute (ref HttpListenerRequest req, ref HttpListenerResponse resp) 
         {
-            string data="";
-            bool foundRoute = false;
+
+            // MAIN SITE ROUTES
+            // ===============================================================================
 
             // HomeController
-            if((req.HttpMethod == "GET") && (req.Url.AbsolutePath == "/")) {
-                HomeController c = new HomeController();
-                data = c.HomePage(ref req, ref resp);
-                foundRoute = true;
-            }
-
-            // Version
-            if((req.HttpMethod == "GET") && (req.Url.AbsolutePath == "/version")) {
-                HomeController c = new HomeController();
-                data = c.Version(ref req, ref resp);
-                foundRoute = true;
-            }
+            if((req.HttpMethod == "GET") && (req.Url.AbsolutePath == "/"))
+                return (new HomeController()).HomePage(ref req, ref resp);
+            
 
             // LoginController
-            if((req.HttpMethod == "GET") && (req.Url.AbsolutePath == "/login")) {
-                LoginController c = new LoginController();
-                data = c.LoginPage(ref req, ref resp);
-                foundRoute = true;
-            }
+            if((req.HttpMethod == "GET") && (req.Url.AbsolutePath == "/login"))
+                return (new LoginController()).LoginPage(ref req, ref resp);
 
 
-            // API -- Auth -- Login
-            if((req.HttpMethod == "POST") && (req.Url.AbsolutePath == "/auth")) {
-                Auth c = new Auth();
-                data = c.Login(ref req, ref resp);
-                foundRoute = true;
-            }
+            // Control Panel
+            if((req.HttpMethod == "GET") && (req.Url.AbsolutePath == "/auth/portal/"))
+                return (new ControlPanelController()).Index(ref req, ref resp);
 
-            // API -- Auth -- SetPassword
-            if((req.HttpMethod == "POST") && (req.Url.AbsolutePath == "/set-password")) {
-                Auth c = new Auth();
-                data = c.SetPassword(ref req, ref resp);
-                foundRoute = true;
-            }
+
+
+            // API ROUTES
+            // ===============================================================================
+
+            // Auth -- Login
+            if((req.HttpMethod == "POST") && (req.Url.AbsolutePath == "/api/auth/login"))
+                return (new Auth()).Login(ref req, ref resp);
+            
+
+            // Auth -- Logout
+            if((req.HttpMethod == "POST") && (req.Url.AbsolutePath == "/api/auth/logout"))
+                return (new Auth()).Logout(ref req, ref resp);
+
+
+            // Auth -- SetPassword
+            if((req.HttpMethod == "POST") && (req.Url.AbsolutePath == "/api/set-password"))
+                return (new Auth()).CreateUser(ref req, ref resp);
 
 
 
 
             // Error 404 - Route not found
-            if (!foundRoute) {
-                ErrorController c = new ErrorController();
-                data = c.NotFound(ref req, ref resp);
-            }
-
-            // Return to main thread
-            return data;
+            return (new ErrorController()).NotFound(ref req, ref resp);
         }
     }
 }
