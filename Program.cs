@@ -24,7 +24,7 @@ namespace WebServer
             while (runServer)
             {
                 // Create default admin user
-                MemoryCache.Universe.Add("LoginDetails_mark", "Pickle31+");
+                MemoryCache.Universe.Add("LoginDetails_mark", "lol123");
 
                 // Will wait here until we hear from a connection
                 HttpListenerContext ctx = await listener.GetContextAsync();
