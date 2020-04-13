@@ -23,7 +23,7 @@ namespace Controllers
                 resp.Redirect("/auth/portal/");
 
             // Define the path to the content
-            string path = "D:\\Development\\C#\\Rizor\\html\\public\\auth\\login.html";
+            string path = Config.Paths.BasePath + "\\html\\public\\auth\\login.html";
 
             // Load the HTML page into a string
             string html = File.ReadAllText(path);

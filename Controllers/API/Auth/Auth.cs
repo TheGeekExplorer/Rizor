@@ -1,7 +1,10 @@
 using System.Net;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Collections.Generic;
 using Core;
 
-namespace Controllers
+namespace APIControllers
 {
     class Auth
     {
@@ -12,25 +15,42 @@ namespace Controllers
         // @return string
         public string Login (ref HttpListenerRequest req, ref HttpListenerResponse resp) 
         {
+            // Set response document type to JSON
+            resp.ContentType = "application/json";
+
+            // Create response JSON dictionary
+            Dictionary<string, string> response = new Dictionary<string, string>();
+
+
             // Check if the user login details are in the memory cache
             string username  = Query.Data["username"];
             string password  = Query.Data["password"];
             string password1 = MemoryCache.Universe.Get("LoginDetails_" + username);
+
 
             // Check user is authed
             if ((password  != null) && 
                 (password1 != null) && 
                 (password  == password1)) {
 
-                // Create session cookie
-                Cookies.CreateSession(ref req, ref resp, username);
 
-                // Set response document type to JSON
-                resp.ContentType = "application/json";
+                // Create session cookie
+                bool s = Authentication.CreateSession(ref req, ref resp, username);
+
+                // Check session could be created, if not then error out.
+                if (!s) {
+                    resp.StatusCode = 500;
+                    response.Add("status","SESSION COULD NOT BE CREATED");
+                    return JsonSerializer.Serialize(response);
+                }
+
 
                 // Return an OK
                 resp.StatusCode = 200;
-                return "{'status':'OK'}";
+
+                // Build response
+                response.Add("status","OK");
+                return JsonSerializer.Serialize(response);
 
 
             // Not Authed
@@ -41,7 +61,10 @@ namespace Controllers
 
                 // Return NULL as user is not authenticated
                 resp.StatusCode = 403;
-                return "{'status':'NOT OK'}";
+
+                // Build response
+                response.Add("status","INCORRECT LOGIN CREDENTIALS");
+                return JsonSerializer.Serialize(response);  
             }
 
         }
@@ -57,9 +80,18 @@ namespace Controllers
             // Set response document type to JSON
             resp.ContentType = "application/json";
 
+            // Create session cookie
+            Authentication.DestroySession(ref req, ref resp);
+
             // Return an OK
             resp.StatusCode = 200;
-            return "{'status':'OK'}";            
+
+            // Create response JSON dictionary
+            Dictionary<string, string> response = new Dictionary<string, string>();
+            response.Add("status","OK");
+
+            // Send response
+            return JsonSerializer.Serialize(response);           
         }
 
         
@@ -80,9 +112,12 @@ namespace Controllers
             // Set the response document type to JSON
             resp.ContentType = "application/json";
 
-            // Return status
-            resp.StatusCode = 200;
-            return "{'status':'OK'}";
+            // Create response JSON dictionary
+            Dictionary<string, string> response = new Dictionary<string, string>();
+            response.Add("status","OK");
+
+            // Send response
+            return JsonSerializer.Serialize(response); 
         }
         
 

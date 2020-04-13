@@ -1,5 +1,6 @@
 using System.Net;
 using Controllers;
+using APIControllers;
 
 namespace Core
 {
@@ -23,13 +24,18 @@ namespace Core
             
 
             // LoginController
-            if((req.HttpMethod == "GET") && (req.Url.AbsolutePath == "/login"))
+            if((req.HttpMethod == "GET") && (req.Url.AbsolutePath == "/login/"))
                 return (new LoginController()).LoginPage(ref req, ref resp);
 
 
             // Control Panel
             if((req.HttpMethod == "GET") && (req.Url.AbsolutePath == "/auth/portal/"))
                 return (new ControlPanelController()).Index(ref req, ref resp);
+
+
+            // Control Panel
+            if((req.HttpMethod == "GET") && (req.Url.AbsolutePath == "/auth/portal/actions/"))
+                return (new RizorActionsController()).Index(ref req, ref resp);
 
 
 
@@ -49,6 +55,11 @@ namespace Core
             // Auth -- SetPassword
             if((req.HttpMethod == "POST") && (req.Url.AbsolutePath == "/api/set-password"))
                 return (new Auth()).CreateUser(ref req, ref resp);
+
+
+            // WEATHER -- GetTopLevel
+            if((req.HttpMethod == "POST") && (req.Url.AbsolutePath == "/api/weather/get-top-level"))
+                return (new WeatherStats()).GetTopLevel(ref req, ref resp);
 
 
 

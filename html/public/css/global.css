@@ -24,6 +24,52 @@ html, body {
     max-width: 100%;
     clear:     both;
 }
+
+
+.green-bg { background-color:#41b3a3; }
+.red-bg { background-color:#e27d60; }
+.blue-bg { background-color:#85dcb0; }
+.orange-bg { background-color:#e8a87c; }
+.pink-bg { background-color:#c38d9e; }
+.gradient-bg { background-image: linear-gradient(to bottom right, #e8a87c, #e27d60); }
+
+h1 { font-family: 'Passion One', cursive; }
+h2 { font-family: 'Passion One', cursive; }
+h3, h4, h5, h6, body, html { font-family: 'Catamaran', sans-serif; font-weight:bold; }
+p, div, span, small, nav, ul, li, ol, a { font-family: 'Catamaran', sans-serif; }
+
+
+.navbar .fa {
+    padding-right:0.25em;
+}
+.navbar > a {
+    font-size:1.5em;
+    padding: 0 0;
+}
+
+.badge {
+    font-size:0.75em;
+}
+
+
+/** Login Page **/
+/** Login Page **/
+
+.login-page .container {
+    padding:   0;
+    margin:    auto;
+    margin-top:2em;
+    width:     100%;
+    max-width: 600px;
+    clear:     both;
+}
+
+
+
+
+/** Control Panel **/
+/** Control Panel **/
+
 .container.control-panel {
     padding:   0;
     margin:    0;
@@ -32,55 +78,117 @@ html, body {
     clear:     both;
 }
 
-
-/** Control Panel **/
-/** Control Panel **/
-
-
-
 /** LEFT MENU **/
 
-.left-menu {
-    background-color: #728C7F;
+.control-panel .left-menu {
     height: 100%;
-    width:  60px;
+    width:  50px;
     padding: 0 0;
     float:  left;
-    box-shadow: 0 5px 10px #44544C;
+    box-shadow: 0 0 10px #44544C;
 }
 
-.left-menu ul {
+.control-panel .left-menu ul {
     margin: 0 0;
     padding: 0.75em 0;
     list-style-type: none;
 }
 
-.left-menu ul li {
+.control-panel .left-menu ul li {
     padding: 0.5em 0;
     width:100%;
     text-align:center;
 }
 
-.left-menu ul li a {
+.control-panel .left-menu ul li a {
     font-weight: bold;
-    color: #fff;
+    color: #333;
 }
 
-.left-menu .fa {
+.control-panel .left-menu .fa {
     font-size: 1.25em !important;
 }
-.left-menu .fa:hover,
-.left-menu .fa:focus {
+.control-panel .left-menu .fa:hover,
+.control-panel .left-menu .fa:focus {
     color: #ccc;
 }
 
 /** RIGHT MENU **/
 
-.right-menu {
-    width: calc(100% - 105px);
+.control-panel .right-menu {
+    width: calc(100% - 70px);
     padding-left: 30px;
     padding-top:  10px;
     float: left;
 }
+
+.control-panel .stat-box {
+    margin: 1em 0;
+    padding:1em;
+    height:100%;
+    border-radius:0.25em;
+    box-shadow: 1px 1px 3px #ccc;
+}
+
+.control-panel .stat-box > h4 {
+    font-family: 'Passion One', cursive;
+    font-weight:bold;
+    text-transform: uppercase;
+}
+
+.control-panel .stat-box .fa-sync {
+    position:absolute;
+    top:40px;
+    right: 40px;
+    cursor: pointer;
+}
+
+.fa-sync.animate {
+    -webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); }}
+
+.control-panel .stat-box .stat-cell {
+    margin: 0.5em 0 1em 0;
+    padding: 0.5em 0 0.1em 0;
+    text-align:center;
+}
+
+.control-panel .stat-box .stat-cell.orange { 
+    border-right: 1px solid #d8986c; 
+    border-top: 1px solid #d8986c; 
+    border-bottom: 1px solid #d8986c; 
+}
+.control-panel .stat-box .stat-cell.red { 
+    border-right: 1px solid #d26d50; 
+    border-top: 1px solid #d26d50; 
+    border-bottom: 1px solid #d26d50; 
+}
+.control-panel .stat-box .stat-cell.pink { 
+    border-right: 1px solid #b37d8e; 
+    border-top: 1px solid #b37d8e; 
+    border-bottom: 1px solid #b37d8e; 
+}
+
+.control-panel .stat-box .stat-cell:last-of-type {
+    border-right:0;
+}
+.control-panel .stat-box .stat-cell h3 span {
+    font-family: 'Lexend Deca', sans-serif;
+    font-size:1em;
+    font-weight:bold;
+}
+.control-panel .stat-box .stat-cell h6 {
+    font-size:0.9em;
+    font-weight:bold;
+}
+
+
+
+
 
 

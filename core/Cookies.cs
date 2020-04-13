@@ -8,35 +8,35 @@ namespace Core
     class Cookies
     {
 
-        // Creates a new session, including a session cookie, and a new
-        // Hash which is stored in the session cookie, and in the memory
-        // cache under the session universe.
+
+        // Creates the cookie, and returns true
         // @param ref HttpListenerRequest req
         // @param ref HttpListenerResponse resp
         // @param string username
         // @return bool
-        public static bool CreateSession (ref HttpListenerRequest req, ref HttpListenerResponse resp, string username) 
-        {
-            // Create a unique hash  
-            string hash = Hash.CreateSHA256(DateTime.Now.ToString());
-
-            // Save SessionID in Memory Cache
-            MemoryCache.Universe.Add("Session_" + hash, username);
-
+        public static bool CreateCookie (ref HttpListenerRequest req, ref HttpListenerResponse resp, 
+            string CookieName,
+            string CookieValue,
+            DateTime CookieExpires,
+            string CookieDomain,
+            string CookiePath,
+            bool CookieHTTPOnly,
+            bool CookieSecure
+        ) {
             // Create session cookie
             Cookie myCookie = new Cookie();
-            myCookie.Expires = DateTime.MinValue;
-            myCookie.Name = "SESSION";
-            myCookie.Value = hash;
-            myCookie.HttpOnly = false;
-            myCookie.Domain = "localhost";
-            myCookie.Secure = false;
-            myCookie.Path = "/";
+            myCookie.Expires = CookieExpires;
+            myCookie.Name = CookieName;
+            myCookie.Value = CookieValue;
+            myCookie.HttpOnly = CookieHTTPOnly;
+            myCookie.Domain = CookieDomain;
+            myCookie.Secure = CookieSecure;
+            myCookie.Path = CookiePath;
 
             // Send cookie to browser
             resp.SetCookie(myCookie);
 
-            // Return confirmation
+            // Get the cookie
             return true;
         }
 

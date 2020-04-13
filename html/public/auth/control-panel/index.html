@@ -1,0 +1,280 @@
+<html>
+    <head>
+        <title>Rizor Control Panel!</title>
+
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="/html/public/font-awesome/css/all.css" rel="stylesheet">
+        <link href="/html/public/css/global.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@300&family=Lexend+Deca&family=Passion+One:wght@700&display=swap" rel="stylesheet">
+
+    </head>
+    <body class="control-panel">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="/auth/portal/"><i class="fa fa-dragon"></i> RIZOR</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+
+        <main class="container control-panel">
+            
+            <!-- LEFT PANE -->
+            <aside class="left-menu green-bg">
+                <ul>
+                    <li><a href="/auth/portal/" title="Control Panel Home"><i class="fa fa-home"></i></a></li>
+                    <li><a href="/auth/portal/job-server/" title="Teppanyaki Schedule"><i class="fa fa-business-time"></i></a></li>
+                    <li><a href="/auth/portal/weather/" title="Weather Stats &amp; Configuration"><i class="fa fa-cloud-sun-rain"></i></a></li>
+                    <li><a href="/auth/portal/backups/" title="Backup Stats &amp; Configuration"><i class="fa fa-hdd"></i></a></li>
+                    <li><a href="/auth/portal/user-management/" title="User Management"><i class="fa fa-users"></i></a></li>
+                    <li><a href="/auth/portal/actions/" title="Rizor Management"><i class="fa fa-stop-circle"></i></a></li>
+                    <li><a href="#" id="logout" title="Logout"><i class="fa fa-door-open"></i></a></li>
+                </ul>
+            </aside>
+
+            <!-- RIGHT PANE -->
+            <article class="right-menu">
+                
+                <!-- ERROR MESSAGING -->
+                <span id="error" class="badge badge-danger hidden">There was a problem while trying to log you out. Please try again.</span>
+                <span id="notAuthed" class="badge badge-danger hidden">Sorry, could not perform that operation because you are not authed.</span>
+
+                <!-- TOP STAT BOXES -->
+                <div class="row">
+                    
+                    <!-- STAT BOX #1 -->
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="stat-box orange-bg">
+                            <h4>Weather Loading Stats</h4>  <i class="fa fa-sync" id="WeatherSync"></i>
+                            <div class="row">
+                                <div class="col-md-4 col-lg-3 stat-cell orange">
+                                    <h3><span id="weather-total-datapoints">N/A</span></h3>
+                                    <h6>Data Points</h6>
+                                </div>
+                                <div class="col-md-4 col-lg-3 stat-cell orange">
+                                    <h3><span id="weather-sites">N/A</span></h3>
+                                    <h6>Sites</h6>
+                                </div>
+                                <div class="col-md-4 col-lg-3 stat-cell orange">
+                                    <h3><span id="weather-sites-3hr">N/A</span></h3>
+                                    <h6>Sites (3hr)</h6>
+                                </div>
+                                <div class="col-md-4 col-lg-3 stat-cell orange">
+                                    <h3><span id="weather-sites-5day">N/A</span></h3>
+                                    <h6>Sites (5day)</h6>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                Indicates the datapoints loaded for the FISH interface.
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <!-- STAT BOX #2 -->
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="stat-box red-bg">
+                            <h4>filesystem Backups</h4>  <i class="fa fa-sync"></i>
+                            <div class="row">
+                                <div class="col-md-4 col-lg-3 stat-cell red">
+                                    <h3><span id="">N/A</span></h3>
+                                    <h6>Backup GBs</h6>
+                                </div>
+                                <div class="col-md-4 col-lg-3 stat-cell red">
+                                    <h3><span id="">N/A</span></h3>
+                                    <h6>Files</h6>
+                                </div>
+                                <div class="col-md-4 col-lg-3 stat-cell red">
+                                    <h3><span id="">N/A</span></h3>
+                                    <h6>Folders</h6>
+                                </div>
+                                <div class="col-md-4 col-lg-3 stat-cell red">
+                                    <h3><span id="">N/A</span></h3>
+                                    <h6>Last Backup</h6>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                Indicates the datapoints loaded for the FISH interface.
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <!-- STAT BOX #3 -->
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="stat-box pink-bg">
+                            <h4>Teppenyaki Jobs</h4>  <i class="fa fa-sync"></i>
+                            <div class="row">
+                                <div class="col-md-4 col-lg-3 stat-cell pink">
+                                    <h3><span id="">N/A</span></h3>
+                                    <h6>Total Jobs</h6>
+                                </div>
+                                <div class="col-md-4 col-lg-3 stat-cell pink">
+                                    <h3><span id="">N/A</span></h3>
+                                    <h6>Jobs Fail</h6>
+                                </div>
+                                <div class="col-md-4 col-lg-3 stat-cell pink">
+                                    <h3><span id="">N/A</span></h3>
+                                    <h6>Jobs Success</h6>
+                                </div>
+                                <div class="col-md-4 col-lg-3 stat-cell pink">
+                                    <h3><span id="">N/A</span></h3>
+                                    <h6>Status</h6>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                Indicates the datapoints loaded for the FISH interface.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- Main Content -->
+                <div class="row">
+                    
+                    <!-- STAT BOX #1 -->
+                    <div class="col-sm-12">
+                        <div class="stat-box gradient-bg">
+                            <h4>Something else here</h4>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent id leo a risus condimentum ullamcorper. Nam arcu arcu, lacinia id lacinia vitae, condimentum eu sapien. Fusce sed fringilla arcu. Nulla lobortis finibus varius. Nulla id nisi pharetra, hendrerit est a, vehicula velit. Quisque sollicitudin, purus eget dictum eleifend, tortor libero pellentesque diam, eu ultricies diam dolor vel leo. Phasellus viverra neque id diam lacinia laoreet. Phasellus varius ex ex, quis malesuada nulla gravida a. Donec lobortis, mauris in placerat venenatis, libero nibh facilisis eros, a venenatis sem ante vel nibh. Mauris sed purus eget nisi tristique molestie. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam vitae diam scelerisque, posuere urna eget, ornare lectus. Nunc commodo accumsan suscipit. Donec pretium ipsum id pretium vestibulum. Sed tempus ut purus id condimentum.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </article>
+
+        </main>
+
+    </body>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+
+ 
+
+<script>
+
+    // Update the stat boxes on page load
+    $(document).ready(function() {
+        updateWeatherStats();
+    })
+    
+
+    // When someone clicks on the sync then update stats
+    $("#WeatherSync").click(function() {
+
+        // Animate the sync icon
+        $("#WeatherSync").addClass("animate");
+
+        // Get the stats from the API
+        updateWeatherStats();
+        
+        // After 2 seconds stop animation
+        setTimeout(function() {
+            $("#WeatherSync").removeClass("animate")
+        }, 2000);
+    });
+
+
+
+    // Gets the weather stats from the API
+    function updateWeatherStats () {
+        
+        // Define data
+        var data = {};
+        
+        // Send to API for Login
+        $.ajax({
+            type: "POST",
+            url: "/api/weather/get-top-level",
+            data: data,
+            statusCode: {
+                
+                // Success, user is authed
+                200: function (data) {
+                    console.log(data);
+                    
+                    // Parse the JSON
+                    var json = jQuery.parseJSON(data.responseText);
+
+                    // Update the stat-box cells
+                    $("#weather-total-datapoints").html(json.stats[0]);
+                    $("#weather-sites").html(json.stats[1]);
+                    $("#weather-sites-3hr").html(json.stats[2]);
+                    $("#weather-sites-5day").html(json.stats[3]);
+                },
+
+                // Returned a 403 Not Authed
+                403: function() {
+                    $("#notAuthed").removeClass("hidden");
+                },
+
+                // Error API Not Found.
+                404: function () {
+                    $("#error").show();
+                },
+
+                // Major Internal Error.
+                500: function () {
+                    $("#error").show();
+                },
+
+            },
+            dataType: "application/json"
+        });
+    }
+
+</script>
+
+
+
+
+
+
+<script>
+    // On form submit send data to API
+    $("#logout").click(function(e) {
+        e.preventDefault();
+        
+        // Define data
+        var data = {};
+        
+        // Send to API for Login
+        $.ajax({
+            type: "POST",
+            url: "/api/auth/logout",
+            data: data,
+            statusCode: {
+                
+                // Success, user is authed
+                200: function () {
+                    window.location.href = "/";
+                },
+
+                // Error API Not Found.
+                404: function () {
+                    $("#error").show();
+                },
+
+                // Major Internal Error.
+                500: function () {
+                    $("#error").show();
+                },
+
+            },
+            dataType: "application/json"
+        });
+    });
+
+</script>
+
+</html>
